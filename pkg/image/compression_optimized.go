@@ -59,7 +59,7 @@ func mustDecompress(compressed []byte) (data []byte, dtor func()) {
 	// But we know maximum size of images, so just mmap the max size.
 	// It's fast and unused part does not consume memory.
 	// Note: executor/common_zlib.h also knows this const.
-	const maxImageSize = 132 << 20
+	const maxImageSize = 300 << 20
 	var err error
 	data, err = syscall.Mmap(-1, 0, maxImageSize, syscall.PROT_READ|syscall.PROT_WRITE,
 		syscall.MAP_ANON|syscall.MAP_PRIVATE)
