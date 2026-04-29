@@ -1145,13 +1145,6 @@ func (mgr *Manager) minimizeCorpusLocked() {
 
 	mgr.corpusDBMu.Lock()
 	defer mgr.corpusDBMu.Unlock()
-	for key := range mgr.corpusDB.Records {
-		ok1 := mgr.corpus.Item(key) != nil
-		_, ok2 := mgr.disabledHashes[key]
-		if !ok1 && !ok2 {
-			mgr.corpusDB.Delete(key)
-		}
-	}
 	if err := mgr.corpusDB.Flush(); err != nil {
 		log.Fatalf("failed to save corpus database: %v", err)
 	}
